@@ -8,6 +8,9 @@
 <link rel="stylesheet" href="style.css">
 <link rel="manifest" href="manifest.json">
 
+<!-- Professional Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
 <!-- QR Libraries -->
 <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
 <script src="https://unpkg.com/html5-qrcode"></script>
@@ -15,20 +18,35 @@
 
 <body>
 
-<h1>Ultimate QR Web App</h1>
+<nav class="navbar">
+  <h2>Ultimate QR Platform</h2>
+</nav>
+
+<h1>QR Generator & Scanner</h1>
 <button id="mode-toggle">Toggle Dark/Light Mode</button>
 <button id="installBtn" style="display:none;">Install App</button>
 
 <div class="container">
 
   <div class="card">
-    <h2>Generate QR Code</h2>
-    <input type="text" id="qr-text" placeholder="Type text or URL">
+
+    <div class="tabs">
+      <button onclick="setType('text')">Text</button>
+      <button onclick="setType('url')">URL</button>
+      <button onclick="setType('wifi')">WiFi</button>
+      <button onclick="setType('email')">Email</button>
+      <button onclick="setType('phone')">Phone</button>
+    </div>
+
+    <div id="inputs"></div>
+
     <button onclick="generateQR()">Generate QR</button>
     <canvas id="qr-code"></canvas>
     <button onclick="copyQRText()">Copy QR Text</button>
     <button onclick="downloadQR()">Download QR Image</button>
+
     <p id="scan-count">Total Scans: 0</p>
+    <button onclick="clearHistory()">Clear History</button>
 
     <h3>Scan History</h3>
     <ul id="history-list"></ul>
@@ -37,10 +55,15 @@
   <div class="card">
     <h2>Scan QR Code</h2>
     <div id="reader"></div>
-    <div id="qr-result">Scanned Result Will Appear Here</div>
+    <div id="qr-result"></div>
+    <button id="openLinkBtn" style="display:none;" onclick="openLink()">Open Link</button>
   </div>
 
 </div>
+
+<footer>
+  <p>Made by Your Name</p>
+</footer>
 
 <script src="script.js"></script>
 </body>
