@@ -1,37 +1,75 @@
-// Dark Mode
-const modeBtn = document.getElementById("mode-toggle");
-modeBtn.onclick = () => document.body.classList.toggle("light");
+let currentType = "text";
+let generatedValue = "";
 
-// QR Generator (Button Only)
-const qrInput = document.getElementById("qr-text");
-const qrCanvas = document.getElementById("qr-code");
+function setType(type){
+  currentType = type;
+  const inputDiv = document.getElementById("inputs");
+
+  if(type === "text" || type === "url"){
+    inputDiv.innerHTML = `<input type="text" id="mainInput" placeholder="Enter ${type}">`;
+  }
+
+  if(type === "wifi"){
+    inputDiv.innerHTML = `
+      <input type="text" id="ssid" placeholder="WiFi Name">
+      <input type="text" id="password" placeholder="Password">
+    `;
+  }
+
+  if(type === "email"){
+    inputDiv.innerHTML = `
+      <input type="text" id="email" placeholder="Email Address">
+    `;
+  }
+
+  if(type === "phone"){
+    inputDiv.innerHTML = `
+      <input type="text" id="phone" placeholder="Phone Number">
+    `;
+  }
+}
+
+setType("text");
 
 function generateQR(){
-  const text = qrInput.value;
-  if(!text){
-    qrCanvas.getContext('2d').clearRect(0,0, qrCanvas.width, qrCanvas.height);
-    return;
+  const canvas = document.getElementById("qr-code");
+
+  if(currentType === "text" || currentType === "url"){
+    generatedValue = document.getElementById("mainInput").value;
   }
-  QRCode.toCanvas(qrCanvas, text, { width: 250 });
+
+  if(currentType === "wifi"){
+    const ssid = document.getElementById("ssid").value;
+    const password = document.getElementById("password").value;
+    generatedValue = `WIFI:T:WPA;S:${ssid};P:${password};;`;
+  }
+
+  if(currentType === "email"){
+    const email = document.getElementById("email").value;
+    generatedValue = `mailto:${email}`;
+  }
+
+  if(currentType === "phone"){
+    const phone = document.getElementById("phone").value;
+    generatedValue = `tel:${phone}`;
+  }
+
+  QRCode.toCanvas(canvas, generatedValue, { width: 250 });
 }
 
-// Copy
 function copyQRText(){
-  const text = qrInput.value;
-  if(!text) return alert("No text to copy!");
-  navigator.clipboard.writeText(text);
-  alert("Copied!");
+  if(!generatedValue) return;
+  navigator.clipboard.writeText(generatedValue);
 }
 
-// Download
 function downloadQR(){
+  const canvas = document.getElementById("qr-code");
   const link = document.createElement('a');
   link.download = "qr-code.png";
-  link.href = qrCanvas.toDataURL();
+  link.href = canvas.toDataURL();
   link.click();
 }
 
-// Scan Counter + History
 let scanCount = localStorage.getItem("scanCount") || 0;
 document.getElementById("scan-count").innerText = "Total Scans: " + scanCount;
 
@@ -54,30 +92,35 @@ function showHistory(){
 }
 showHistory();
 
-// Scanner
+function clearHistory(){
+  localStorage.removeItem("history");
+  localStorage.removeItem("scanCount");
+  scanCount = 0;
+  document.getElementById("scan-count").innerText = "Total Scans: 0";
+  showHistory();
+}
+
 function onScanSuccess(decodedText){
-  document.getElementById("qr-result").innerText = decodedText;
+  document.getElementById("qr-result").innerHTML =
+    `<a href="${decodedText}" target="_blank">${decodedText}</a>`;
+
+  if(decodedText.startsWith("http")){
+    document.getElementById("openLinkBtn").style.display = "block";
+  }
+
+  generatedValue = decodedText;
+
   scanCount++;
   localStorage.setItem("scanCount", scanCount);
   document.getElementById("scan-count").innerText = "Total Scans: " + scanCount;
   saveHistory(decodedText);
 }
 
+function openLink(){
+  window.open(generatedValue, "_blank");
+}
+
 const html5QrcodeScanner = new Html5QrcodeScanner(
   "reader", { fps: 10, qrbox: 300 }
 );
 html5QrcodeScanner.render(onScanSuccess);
-
-// PWA Install
-let deferredPrompt;
-const installBtn = document.getElementById("installBtn");
-
-window.addEventListener("beforeinstallprompt", (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-  installBtn.style.display = "block";
-});
-
-installBtn.addEventListener("click", () => {
-  deferredPrompt.prompt();
-});
