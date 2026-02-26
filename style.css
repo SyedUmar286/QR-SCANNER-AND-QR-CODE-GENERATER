@@ -1,63 +1,69 @@
-* { box-sizing: border-box; transition: all 0.3s; }
+* { box-sizing: border-box; transition: all 0.3s ease; }
 
 body {
-  font-family: 'Segoe UI', sans-serif;
-  margin: 0; padding: 0;
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
   background-color: #1e1e2f;
   color: white;
-  display: flex; flex-direction: column; align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   min-height: 100vh;
 }
 
-body.light { background-color: #f5f5f5; color: #1e1e2f; }
+.navbar {
+  width: 100%;
+  background: #00ffff;
+  padding: 15px;
+  text-align: center;
+  color: #1e1e2f;
+  font-weight: 600;
+}
 
-h1 { margin: 20px 0; color: #00ffff; text-align: center; }
-body.light h1 { color: #007bff; }
+footer {
+  margin-top: auto;
+  padding: 15px;
+  width: 100%;
+  text-align: center;
+  background: #111;
+}
 
 .container {
-  display: flex; flex-wrap: wrap; justify-content: center;
-  width: 100%; max-width: 1200px; margin-bottom: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
 }
 
 .card {
   background-color: #2e2e3e;
-  margin: 20px; padding: 20px; border-radius: 15px;
-  flex: 1 1 400px; min-width: 350px;
-  display: flex; flex-direction: column; align-items: center;
+  margin: 20px;
+  padding: 25px;
+  border-radius: 15px;
+  flex: 1 1 400px;
+  min-width: 350px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  animation: fadeIn 0.6s ease;
 }
 
-body.light .card {
-  background-color: #ffffff;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-input[type=text] {
-  width: 100%; padding: 12px;
-  border-radius: 8px; border: none;
-  margin-bottom: 10px; font-size: 16px;
+.tabs button {
+  margin: 5px;
 }
 
 button {
-  padding: 12px 15px;
-  width: 100%;
-  font-size: 16px;
-  border: none;
+  padding: 10px;
   border-radius: 8px;
-  background-color: #00ffff;
-  color: #1e1e2f;
+  border: none;
   cursor: pointer;
-  margin-bottom: 10px;
+  margin: 5px 0;
 }
 
-button:hover { background-color: #00cccc; }
+canvas { margin-top: 10px; }
 
-body.light button {
-  background-color: #007bff;
-  color: white;
-}
-
-body.light button:hover { background-color: #0056b3; }
-
-#reader { width: 100%; max-width: 500px; margin-top: 10px; }
-#qr-result { margin-top: 15px; font-weight: bold; word-break: break-word; }
+#reader { width: 100%; margin-top: 10px; }
