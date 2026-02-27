@@ -9,11 +9,11 @@
 <link rel="manifest" href="manifest.json">
 
 <!-- Professional Font -->
-<link href="https://fonts.googleapis.com" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
 <!-- QR Libraries -->
-<script src="https://cdn.jsdelivr.net"></script>
-<script src="https://unpkg.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+<script src="https://unpkg.com/html5-qrcode"></script>
 </head>
 
 <body>
@@ -23,14 +23,13 @@
 </nav>
 
 <h1>QR Generator & Scanner</h1>
-<div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 20px;">
-    <button id="mode-toggle">Toggle Dark/Light Mode</button>
-    <button id="installBtn" style="display:none;">Install App</button>
-</div>
+<button id="mode-toggle">Toggle Dark/Light Mode</button>
+<button id="installBtn" style="display:none;">Install App</button>
 
 <div class="container">
 
   <div class="card">
+
     <div class="tabs">
       <button onclick="setType('text')">Text</button>
       <button onclick="setType('url')">URL</button>
@@ -41,35 +40,23 @@
 
     <div id="inputs"></div>
 
-    <!-- NAYA: Customization Options -->
-    <div class="custom-box" style="margin: 15px 0; background: #3e3e4e; padding: 10px; border-radius: 8px; display: flex; gap: 10px; align-items: center; justify-content: space-around;">
-        <label style="font-size: 12px;">Color: <input type="color" id="qrColor" value="#00ffff" style="border:none; cursor:pointer;"></label>
-        <label style="font-size: 12px;">Logo: <input type="file" id="logoInput" accept="image/*" style="width: 100px; font-size: 10px;"></label>
-    </div>
-
-    <button onclick="generateQR()" style="width: 100%; background: #00ffff; color: #1e1e2f; font-weight: bold;">Generate QR</button>
-    
-    <div style="text-align: center; margin-top: 15px;">
-        <canvas id="qr-code"></canvas>
-    </div>
-
-    <div style="display: flex; gap: 5px; margin-top: 10px;">
-        <button onclick="copyQRText()" style="flex: 1;">Copy Text</button>
-        <button onclick="downloadQR()" style="flex: 1;">Download Image</button>
-    </div>
+    <button onclick="generateQR()">Generate QR</button>
+    <canvas id="qr-code"></canvas>
+    <button onclick="copyQRText()">Copy QR Text</button>
+    <button onclick="downloadQR()">Download QR Image</button>
 
     <p id="scan-count">Total Scans: 0</p>
-    <button onclick="clearHistory()" style="width: 100%;">Clear History</button>
+    <button onclick="clearHistory()">Clear History</button>
 
     <h3>Scan History</h3>
-    <ul id="history-list" style="text-align: left; padding: 0;"></ul>
+    <ul id="history-list"></ul>
   </div>
 
   <div class="card">
     <h2>Scan QR Code</h2>
     <div id="reader"></div>
-    <div id="qr-result" style="margin-top: 15px; word-break: break-all; color: #00ffff; font-weight: bold;"></div>
-    <button id="openLinkBtn" style="display:none; width: 100%; margin-top: 10px; background: #00ffff; color: #1e1e2f;" onclick="openLink()">Open Link</button>
+    <div id="qr-result"></div>
+    <button id="openLinkBtn" style="display:none;" onclick="openLink()">Open Link</button>
   </div>
 
 </div>
