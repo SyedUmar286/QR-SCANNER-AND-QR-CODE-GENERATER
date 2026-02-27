@@ -52,8 +52,20 @@ footer {
   to { opacity: 1; transform: translateY(0); }
 }
 
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+  border: 1px solid #444;
+  background: #1e1e2f;
+  color: white;
+}
+
 .tabs button {
   margin: 5px;
+  background: #3e3e4e;
+  color: white;
 }
 
 button {
@@ -62,9 +74,29 @@ button {
   border: none;
   cursor: pointer;
   margin: 5px 0;
+  background: #4e4e5e;
+  color: white;
 }
 
-canvas { margin-top: 10px; }
+button:hover {
+  filter: brightness(1.2);
+}
 
-#reader { width: 100%; margin-top: 10px; }
+canvas { 
+  margin-top: 10px; 
+  background: white; 
+  padding: 10px; 
+  border-radius: 10px; 
+}
 
+#reader { width: 100%; margin-top: 10px; border-radius: 10px; overflow: hidden; }
+
+#history-list li {
+  background: #3e3e4e;
+  padding: 8px;
+  margin: 5px 0;
+  border-radius: 5px;
+  list-style: none;
+  font-size: 13px;
+  border-left: 3px solid #00ffff;
+}
