@@ -4,12 +4,5 @@
   "start_url": ".",
   "display": "standalone",
   "background_color": "#1e1e2f",
-  "theme_color": "#1e1e2f",
-  "icons": [
-    {
-      "src": "https://cdn-icons-png.flaticon.com",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ]
+  "theme_color": "#1e1e2f"
 }
