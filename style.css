@@ -11,6 +11,7 @@ body {
   min-height: 100vh;
 }
 
+/* NAVBAR */
 .navbar {
   width: 100%;
   background: #00ffff;
@@ -20,6 +21,7 @@ body {
   font-weight: 600;
 }
 
+/* FOOTER */
 footer {
   margin-top: auto;
   padding: 15px;
@@ -28,6 +30,7 @@ footer {
   background: #111;
 }
 
+/* CONTAINER */
 .container {
   display: flex;
   flex-wrap: wrap;
@@ -36,6 +39,7 @@ footer {
   max-width: 1200px;
 }
 
+/* CARD */
 .card {
   background-color: #2e2e3e;
   margin: 20px;
@@ -67,3 +71,27 @@ button {
 canvas { margin-top: 10px; }
 
 #reader { width: 100%; margin-top: 10px; }
+
+/* =========================
+   LIGHT MODE (FIXED)
+========================= */
+
+.light-mode {
+  background-color: #f5f5f5;
+  color: #1e1e2f;
+}
+
+.light-mode .card {
+  background-color: #ffffff;
+  color: #1e1e2f;
+}
+
+.light-mode .navbar {
+  background: #007bff;
+  color: white;
+}
+
+.light-mode footer {
+  background: #ddd;
+  color: #000;
+}
