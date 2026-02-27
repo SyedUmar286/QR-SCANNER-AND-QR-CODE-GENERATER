@@ -124,7 +124,3 @@ const html5QrcodeScanner = new Html5QrcodeScanner(
   "reader", { fps: 10, qrbox: 300 }
 );
 html5QrcodeScanner.render(onScanSuccess);
-// Dark Mode Toggle
-document.getElementById("mode-toggle").addEventListener("click", function() {
-  document.body.classList.toggle("light-mode");
-});
