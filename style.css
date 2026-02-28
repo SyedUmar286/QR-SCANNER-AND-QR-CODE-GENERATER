@@ -67,3 +67,23 @@ button {
 canvas { margin-top: 10px; }
 
 #reader { width: 100%; margin-top: 10px; }
+/* Light Mode */
+.light-mode {
+  background-color: #f5f5f5;
+  color: #1e1e2f;
+}
+
+.light-mode .card {
+  background-color: #ffffff;
+  color: #1e1e2f;
+}
+
+.light-mode .navbar {
+  background: #007bff;
+  color: white;
+}
+
+.light-mode footer {
+  background: #ddd;
+  color: #000;
+}
