@@ -1,4 +1,6 @@
 let currentType = "text";
+let uploadedLogo = null;
+let logoSizeValid = false;
 let generatedValue = "";
 
 function setType(type){
