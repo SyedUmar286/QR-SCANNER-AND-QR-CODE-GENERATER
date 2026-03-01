@@ -56,9 +56,20 @@ function generateQR(){
     generatedValue = `tel:${phone}`;
   }
 
-  QRCode.toCanvas(canvas, generatedValue, { width: 250 });
-}
+  QRCode.toCanvas(canvas, generatedValue, { width: 250 }, function () {
 
+  if(uploadedLogo && logoSizeValid){
+    const ctx = canvas.getContext("2d");
+
+    const logoSize = 60;
+    const x = (canvas.width - logoSize) / 2;
+    const y = (canvas.height - logoSize) / 2;
+
+    ctx.drawImage(uploadedLogo, x, y, logoSize, logoSize);
+  }
+
+});
+}
 function copyQRText(){
   if(!generatedValue) return;
   navigator.clipboard.writeText(generatedValue);
@@ -129,4 +140,49 @@ html5QrcodeScanner.render(onScanSuccess);
 // Dark Mode Toggle
 document.getElementById("mode-toggle").addEventListener("click", function() {
   document.body.classList.toggle("light-mode");
+});
+// Logo Upload System
+
+const logoInput = document.getElementById("logoInput");
+const logoMessage = document.getElementById("logoMessage");
+const fixLogoBtn = document.getElementById("fixLogoBtn");
+
+logoInput.addEventListener("change", function(event){
+  const file = event.target.files[0];
+  if(!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function(e){
+    const img = new Image();
+    img.onload = function(){
+
+      uploadedLogo = img;
+
+      if(img.width > 200){
+        logoMessage.innerText = "Logo size bohat bara hai ⚠️";
+        logoSizeValid = false;
+        fixLogoBtn.style.display = "inline-block";
+      }
+      else if(img.width < 50){
+        logoMessage.innerText = "Logo size bohat chota hai ⚠️";
+        logoSizeValid = false;
+        fixLogoBtn.style.display = "inline-block";
+      }
+      else{
+        logoMessage.innerText = "Logo size perfect hai ✅";
+        logoSizeValid = true;
+        fixLogoBtn.style.display = "none";
+        generateQR();
+      }
+    }
+    img.src = e.target.result;
+  }
+  reader.readAsDataURL(file);
+});
+
+fixLogoBtn.addEventListener("click", function(){
+  logoMessage.innerText = "Logo size fixed and applied ✅";
+  logoSizeValid = true;
+  fixLogoBtn.style.display = "none";
+  generateQR();
 });
