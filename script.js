@@ -56,12 +56,14 @@ function generateQR(){
     generatedValue = `tel:${phone}`;
   }
 
-  QRCode.toCanvas(canvas, generatedValue, { width: 250 }, function () {
-
+  QRCode.toCanvas(canvas, generatedValue, {
+  width: 250,
+  errorCorrectionLevel: "H"
+}, function () {
   if(uploadedLogo && logoSizeValid){
     const ctx = canvas.getContext("2d");
 
-    const logoSize = 60;
+    const logoSize = 45;
     const x = (canvas.width - logoSize) / 2;
     const y = (canvas.height - logoSize) / 2;
 
