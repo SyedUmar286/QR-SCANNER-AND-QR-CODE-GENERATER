@@ -57,7 +57,7 @@ function generateQR(){
   }
 
   QRCode.toCanvas(canvas, generatedValue, {
-  width: 250,
+  width: 500,
   errorCorrectionLevel: "H"
 }, function () {
   if(uploadedLogo && logoSizeValid){
