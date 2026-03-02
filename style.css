@@ -82,12 +82,13 @@ body.light-mode {
   background: #007bff;
   color: white;
 }
-#qr-code {
-  width: 250px;
-  height: 250px;
-}
 
 .light-mode footer {
   background: #ddd;
   color: #000;
+}
+
+#qr-code {
+  width: 250px;
+  height: 250px;
 }
