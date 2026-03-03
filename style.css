@@ -129,6 +129,17 @@ html, body {
   .container {
     padding: 8px;
   }
+  .size-controls {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.size-controls button {
+  padding: 6px 12px;
+  margin: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
 
   .card {
     padding: 12px;
