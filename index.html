@@ -42,6 +42,17 @@
 
     <button onclick="generateQR()">Generate QR</button>
     <canvas id="qr-code"></canvas>
+    <div class="size-controls">
+
+  <h3>QR Size</h3>
+  <button onclick="decreaseQR()">−</button>
+  <button onclick="increaseQR()">+</button>
+
+  <h3>Logo Size</h3>
+  <button onclick="decreaseLogo()">−</button>
+  <button onclick="increaseLogo()">+</button>
+
+</div>
     <br><br>
 
 <input type="file" id="logoInput" accept="image/*">
