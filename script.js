@@ -2,7 +2,17 @@ let currentType = "text";
 let uploadedLogo = null;
 let logoSizeValid = false;
 let generatedValue = "";
+// ===== Dynamic QR + Logo Size System =====
+let qrSize = Math.min(window.innerWidth * 0.6, 600);
+let logoSize = qrSize * 0.20;
 
+function getMaxQRSize() {
+  return Math.min(window.innerWidth * 0.9, 900);
+}
+
+function getMinQRSize() {
+  return 180;
+}
 function setType(type){
   currentType = type;
   const inputDiv = document.getElementById("inputs");
@@ -57,13 +67,13 @@ function generateQR(){
   }
 
   QRCode.toCanvas(canvas, generatedValue, {
-  width: 500,
+  width: qrSize,
   errorCorrectionLevel: "H"
 }, function () {
   if(uploadedLogo && logoSizeValid){
     const ctx = canvas.getContext("2d");
 
-    const logoSize = 45;
+    
     const x = (canvas.width - logoSize) / 2;
     const y = (canvas.height - logoSize) / 2;
 
@@ -188,3 +198,45 @@ fixLogoBtn.addEventListener("click", function(){
   fixLogoBtn.style.display = "none";
   generateQR();
 });
+// ===== QR SIZE CONTROLS =====
+
+function increaseQR() {
+  const maxSize = getMaxQRSize();
+  if (qrSize < maxSize) {
+    qrSize += 5;
+    logoSize = qrSize * 0.20; // logo auto adjust
+    generateQR();
+  } else {
+    alert("QR maximum size reached for this device");
+  }
+}
+
+function decreaseQR() {
+  const minSize = getMinQRSize();
+  if (qrSize > minSize) {
+    qrSize -= 5;
+    logoSize = qrSize * 0.20;
+    generateQR();
+  }
+}
+// ===== LOGO SIZE CONTROLS =====
+
+function increaseLogo() {
+  const maxLogo = qrSize * 0.25;
+
+  if (logoSize < maxLogo) {
+    logoSize += qrSize * 0.01;
+    generateQR();
+  } else {
+    alert("Logo maximum safe size reached");
+  }
+}
+
+function decreaseLogo() {
+  const minLogo = qrSize * 0.05;
+
+  if (logoSize > minLogo) {
+    logoSize -= qrSize * 0.01;
+    generateQR();
+  }
+}
