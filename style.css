@@ -146,3 +146,20 @@ html, body {
   }
 
   }
+/* ===== Custom Logo Upload Button ===== */
+
+.custom-file-upload {
+  display: inline-block;
+  padding: 8px 14px;
+  background: #007bff;
+  color: white;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  margin-top: 10px;
+}
+
+.custom-file-upload:hover {
+  background: #0056b3;
+}
