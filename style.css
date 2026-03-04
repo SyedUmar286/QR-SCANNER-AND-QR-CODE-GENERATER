@@ -163,3 +163,9 @@ html, body {
 .custom-file-upload:hover {
   background: #0056b3;
 }
+#qr-code {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 15px auto;
+}
