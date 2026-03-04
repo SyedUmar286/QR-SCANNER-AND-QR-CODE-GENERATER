@@ -234,15 +234,14 @@ function increaseLogo() {
 
 function decreaseLogo() {
   const minLogo = qrSize * 0.05;
-  // ===== AUTO RESPONSIVE RESIZE =====
-window.addEventListener("resize", function(){
-  qrSize = Math.min(window.innerWidth * 0.6, 600);
-  logoSize = qrSize * 0.20;
-  generateQR();
-});
-
+  
   if (logoSize > minLogo) {
     logoSize -= qrSize * 0.01;
     generateQR();
   }
 }
+window.addEventListener("resize", function(){
+  qrSize = Math.min(window.innerWidth * 0.6, 600);
+  logoSize = qrSize * 0.20;
+  generateQR();
+});
