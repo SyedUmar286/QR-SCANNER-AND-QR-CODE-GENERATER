@@ -3,7 +3,7 @@ let uploadedLogo = null;
 let logoSizeValid = false;
 let generatedValue = "";
 // ===== Dynamic QR + Logo Size System =====
-let qrSize = Math.min(window.innerWidth * 0.6, 600);
+let qrSize = Math.min(window.innerWidth * 0.45, 450);
 let logoSize = qrSize * 0.20;
 
 function getMaxQRSize() {
