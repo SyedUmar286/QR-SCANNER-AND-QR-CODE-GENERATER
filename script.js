@@ -171,17 +171,17 @@ logoInput.addEventListener("change", function(event){
       uploadedLogo = img;
 
       if(img.width > 200){
-        logoMessage.innerText = "Logo is too large. Click Logo Size to fix it ⚠️";
+        logoMessage.innerText = "Logo is too large. Click Fix Logo Size ⚠️";
         logoSizeValid = false;
         fixLogoBtn.style.display = "inline-block";
       }
       else if(img.width < 50){
-        logoMessage.innerText = "Logo is too small. Click Logo Size to fix it ⚠️";
+        logoMessage.innerText = "Logo is too small. Click Fix Logo Size ⚠️";
         logoSizeValid = false;
         fixLogoBtn.style.display = "inline-block";
       }
       else{
-        logoMessage.innerText = "Logo size is perfect now ✅";
+        logoMessage.innerText = "Logo size fixed and applied ✅";
         logoSizeValid = true;
         fixLogoBtn.style.display = "none";
         generateQR();
