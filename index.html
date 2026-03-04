@@ -55,7 +55,10 @@
 </div>
     <br><br>
 
-<input type="file" id="logoInput" accept="image/*">
+<label for="logoInput" class="custom-file-upload">
+  Choose Your Logo
+</label>
+<input type="file" id="logoInput" accept="image/*" hidden>
 <p id="logoMessage" style="font-size:14px;"></p>
 <button id="fixLogoBtn" style="display:none;">Fix Logo Size</button>
     <button onclick="copyQRText()">Copy QR Text</button>
