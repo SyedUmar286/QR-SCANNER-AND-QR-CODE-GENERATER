@@ -160,10 +160,7 @@ const html5QrcodeScanner = new Html5QrcodeScanner(
   "reader",
   {
     fps: 10,
-    qrbox: { width: 300, height: 300 },
-    rememberLastUsedCamera: true,
-    supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
-    defaultCamera: "environment"
+    qrbox: { width: 300, height: 300 }
   }
 );
 
