@@ -156,7 +156,18 @@ function onScanSuccess(decodedText){
 function openLink(){
   window.open(generatedValue, "_blank");
 }
+const html5QrcodeScanner = new Html5QrcodeScanner(
+  "reader",
+  {
+    fps: 10,
+    qrbox: { width: 300, height: 300 },
+    rememberLastUsedCamera: true,
+    supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
+    defaultCamera: "environment"
+  }
+);
 
+html5QrcodeScanner.render(onScanSuccess);
 
 // Dark Mode Toggle
 document.getElementById("mode-toggle").addEventListener("click", function() {
@@ -254,18 +265,3 @@ window.addEventListener("resize", function(){
   logoSize = qrSize * 0.20;
   generateQR();
 });
-// ===== QR Scanner System (Camera + Image Scan) =====
-
-const html5QrcodeScanner = new Html5QrcodeScanner(
-  "reader",
-  {
-    fps: 10,
-    qrbox: { width: 300, height: 300 },
-
-    // camera remember karega
-    rememberLastUsedCamera: true,
-
-    // CAMERA + IMAGE DONO ENABLE
-    supportedScanTypes: [
-      Html5QrcodeScanType.SCAN_TYPE_CAMERA,
-      Html
