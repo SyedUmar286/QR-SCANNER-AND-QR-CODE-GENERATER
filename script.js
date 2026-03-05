@@ -156,15 +156,36 @@ function onScanSuccess(decodedText){
 function openLink(){
   window.open(generatedValue, "_blank");
 }
-const html5QrcodeScanner = new Html5QrcodeScanner(
-  "reader",
-  {
-    fps: 10,
-    qrbox: { width: 300, height: 300 }
-  }
-);
+const html5QrCode = new Html5Qrcode("reader");
 
-html5QrcodeScanner.render(onScanSuccess);
+function startScanner() {
+  Html5Qrcode.getCameras().then(devices => {
+
+    if (devices && devices.length) {
+
+      let backCamera = devices.find(device =>
+        device.label.toLowerCase().includes("back") ||
+        device.label.toLowerCase().includes("environment")
+      );
+
+      let cameraId = backCamera ? backCamera.id : devices[0].id;
+
+      html5QrCode.start(
+        cameraId,
+        {
+          fps: 10,
+          qrbox: { width: 300, height: 300 }
+        },
+        onScanSuccess
+      );
+    }
+
+  }).catch(err => {
+    console.log(err);
+  });
+}
+
+startScanner();
 
 // Dark Mode Toggle
 document.getElementById("mode-toggle").addEventListener("click", function() {
@@ -262,3 +283,22 @@ window.addEventListener("resize", function(){
   logoSize = qrSize * 0.20;
   generateQR();
 });
+function scanImageQR() {
+
+  const fileInput = document.getElementById("scanImage");
+
+  if (!fileInput.files.length) {
+    alert("Choose an image first");
+    return;
+  }
+
+  const file = fileInput.files[0];
+
+  html5QrCode.scanFile(file, true)
+    .then(decodedText => {
+      onScanSuccess(decodedText);
+    })
+    .catch(err => {
+      alert("QR not found in image");
+    });
+}
