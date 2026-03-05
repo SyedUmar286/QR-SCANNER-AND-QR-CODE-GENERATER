@@ -88,13 +88,25 @@ function copyQRText(){
 }
 
 function downloadQR(){
+
   const canvas = document.getElementById("qr-code");
-  const link = document.createElement('a');
+
+  const tempCanvas = document.createElement("canvas");
+  const scale = 3; // HD quality
+
+  tempCanvas.width = canvas.width * scale;
+  tempCanvas.height = canvas.height * scale;
+
+  const ctx = tempCanvas.getContext("2d");
+  ctx.scale(scale, scale);
+
+  ctx.drawImage(canvas, 0, 0);
+
+  const link = document.createElement("a");
   link.download = "qr-code.png";
-  link.href = canvas.toDataURL();
+  link.href = tempCanvas.toDataURL("image/png");
   link.click();
 }
-
 let scanCount = localStorage.getItem("scanCount") || 0;
 document.getElementById("scan-count").innerText = "Total Scans: " + scanCount;
 
