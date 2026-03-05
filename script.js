@@ -158,8 +158,16 @@ function openLink(){
 }
 
 const html5QrcodeScanner = new Html5QrcodeScanner(
-  "reader", { fps: 10, qrbox: 300 }
+  "reader",
+  {
+    fps: 10,
+    qrbox: { width: 300, height: 300 },
+    rememberLastUsedCamera: true,
+    supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
+    defaultCamera: "environment"
+  }
 );
+
 html5QrcodeScanner.render(onScanSuccess);
 // Dark Mode Toggle
 document.getElementById("mode-toggle").addEventListener("click", function() {
